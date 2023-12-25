@@ -24,7 +24,7 @@ namespace eTickets_Web.Models
 
         // Relationships
         // Junction modele(Actor_Movie) ilişki kuruluyor
-        public List<Actor_Movie> Actor_Movies { get; set; }
+        public List<Actor_Movie> Actors_Movies { get; set; }
 
 
     }
