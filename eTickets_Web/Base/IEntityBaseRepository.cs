@@ -21,7 +21,7 @@ namespace eTickets_Web.Base
         // Kayıt güncelleme
         void Update(int id,T entity);
 
-        // Kayıt silme
+        // Kayıt silme..İlgili Modelden bunu çağıracağım için T yapısı kullanmadık
         void Delete(int id);
 
 

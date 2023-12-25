@@ -13,4 +13,5 @@
 
 	! Diğer taraftan bir depo(Repository) yapısı kullanmak faydalı olacaktır. Tüm modeller üzerinde kullanılacak olan kayıtları listeleme, kayıt ekleme/güncelleme/silme vs vs. işlemleri için..
 
+	-- Modellerin yaratılması
 
