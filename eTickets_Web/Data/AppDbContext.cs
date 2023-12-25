@@ -9,8 +9,7 @@ namespace eTickets_Web.Data
     {
         // Models => Db
         // Constructor
-        public AppDbContext(DbContextOptions<AppDbContext> options
-            ) :base (options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) :base (options)
         {
                 
         }

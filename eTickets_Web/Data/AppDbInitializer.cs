@@ -100,7 +100,7 @@ namespace eTickets_Web.Data
                         },
                     });
 
-                    context.SaveChanges(); // Örnek Cinema datası yazıldı.
+                    context.SaveChanges(); // Örnek Actor datası yazıldı.
 
 
                 }
