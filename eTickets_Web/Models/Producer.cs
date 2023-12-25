@@ -21,6 +21,7 @@ namespace eTickets_Web.Models
         [Required(ErrorMessage = "Biography alanı gereklidir...")]
         public string Bio { get; set; }
 
-        // Eklenecekler var
+        // Relationships
+        public List<Movie> Movies { get; set; } // bir producer ın birçok filmi olabilir
     }
 }

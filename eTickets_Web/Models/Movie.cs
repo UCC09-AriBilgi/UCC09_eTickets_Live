@@ -1,5 +1,6 @@
 ﻿using eTickets_Web.Base;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eTickets_Web.Models
 {
@@ -26,6 +27,20 @@ namespace eTickets_Web.Models
         [Display(Name = "End Date")] // Viewlardaki ilgili alanın başındaki görünecek text
         public DateTime EndDate  { get; set; }
 
-        //Eklenecekler var
+        //Relationships
+        // Many-to-many
+        public List<Actor_Movie> Actors_Movies { get; set; }
+
+        // One to Many - Cinema
+        public int CinemaId { get; set; }
+        [ForeignKey("CinemaId")]
+        public Cinema Cinema { get; set; }
+
+        // One to Many - Producer
+        public int ProducerId { get; set; }
+        [ForeignKey("ProducerId")]
+        public Producer Producer { get; set;}
+
+
     }
 }
