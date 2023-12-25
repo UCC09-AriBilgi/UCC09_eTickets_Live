@@ -1,0 +1,3 @@
+﻿Proje:
+
+İçinde ödeme kısmı olmayacak(ekran var sadece odeme altyapısı yok) şekilde basit anlamda sinema biletlerinin satışının olacağı, filmler ve aktörler ile ilgili bazı bilgilere erişebilen örnek bir uygulama. CF ile başlaycaz. Db var...
