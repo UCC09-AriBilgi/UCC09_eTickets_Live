@@ -20,5 +20,9 @@
 3. AppDbContext yapısını oluşturalım.
 	Normalde EF'in DbContext sınıfından Inherit yapardık. Fakat bu projede ilerde Identity(Authorization,Authentication) [Kimlik Denetimi(Yetkilendirme,Kimlik Doğrulama)] yapısı kullanılacağı için DbContext den değil de hazır bu tür şeyler için yapılmış IdentityDbContext kullanılacak.Bu kullanımdan önce bir ApplicationUser sınıfı yaratalım.
 
+4. Program.cs altına -> DbContext servisinin eklenmesi(registre edilmesi) (parametresiz olarak)
+
+5. Örnek verilerle db nin yaratılabilmesi için bir AppDbInitializer.cs yaratalım
+
 
 
