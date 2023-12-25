@@ -1,0 +1,16 @@
+﻿25.12.2023-Gün:1
+----------------
+
+1. Sistem içersinde kullanılacak olan Modellerin(table) yaratılması.
+	- Actor
+	- Cinema
+	- Movie
+	- Producer
+	- Director
+	- MovieCategory 
+
+	! Her modelde ortak olabilecek alanları (bu örnekte Id alanları) hepsi için ayrı ayrı belirtmek yerine tabanda kullanılacak bir Interface yapısı yararlı olacaktır. Yani modeller bu Interface'i implement ederek gerekli alanları üzerlerine alabileceklerdir.
+
+	! Diğer taraftan bir depo(Repository) yapısı kullanmak faydalı olacaktır. Tüm modeller üzerinde kullanılacak olan kayıtları listeleme, kayıt ekleme/güncelleme/silme vs vs. işlemleri için..
+
+
