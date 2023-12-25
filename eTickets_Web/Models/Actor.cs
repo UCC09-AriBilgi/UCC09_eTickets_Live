@@ -22,6 +22,10 @@ namespace eTickets_Web.Models
         [Required(ErrorMessage = "Biography alanı gereklidir...")]
         public string Bio { get; set;}
 
+        // Relationships
+        // Junction modele(Actor_Movie) ilişki kuruluyor
+        public List<Actor_Movie> Actor_Movies { get; set; }
+
 
     }
 }
