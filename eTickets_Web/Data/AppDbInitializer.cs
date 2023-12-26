@@ -274,7 +274,7 @@ namespace eTickets_Web.Data
                 if (!await roleManager.RoleExistsAsync(UserRoles.User))
                     await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
 
-                // Users
+                // Admin User
 
                 var UserManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
@@ -292,20 +292,32 @@ namespace eTickets_Web.Data
                         EmailConfirmed = true
                     };
 
-
+                    // Bir admin user yaratılıyo ve buna bir rol atanıyor
+                    await UserManager.CreateAsync(newAdminUser, "1234");
+                    await UserManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
                 }
 
+                // Application User - Normal kullanıcı
 
+                string appUserEMail = "user@etickets.com";
 
+                var appUser = await UserManager.FindByEmailAsync(appUserEMail);
 
+                if (appUser == null) // Yoks.. bulunamamışsa
+                {
+                    var newAppUser = new ApplicationUser()
+                    {
+                        FullName = "Application User",
+                        UserName = "app-user",
+                        Email = appUserEMail,
+                        EmailConfirmed = true
+                    };
 
-
-
+                    // Bir app user yaratılıyo ve buna bir rol atanıyor
+                    await UserManager.CreateAsync(newAppUser, "1234");
+                    await UserManager.AddToRoleAsync(newAppUser, UserRoles.User);
+                }
             }
-
         }
-
-
-
     }
 }
