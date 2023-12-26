@@ -1,4 +1,6 @@
 using eTickets_Web.Data;
+using eTickets_Web.Interfaces;
+using eTickets_Web.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +11,13 @@ builder.Services.AddControllersWithViews();
 // DbContext Configuration
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Conn"))); // appsettings.json daki Conn tanýmýný al
 
-
+// Service Configuration
+// Scoped (Kapsamlý) : Her service kapsamý için yeni bir instance(örnek) oluþturulur.
+// peakup.org
+builder.Services.AddScoped<IActorsService, ActorsService>();
+builder.Services.AddScoped<IProducersService, ProducersService>();
+builder.Services.AddScoped<ICinemasService, CinemasService>();
+builder.Services.AddScoped<IMoviesService, MoviesService>();
 
 
 

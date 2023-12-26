@@ -1,10 +1,15 @@
-﻿using System.Linq.Expressions;
+﻿using eTickets_Web.Data;
+using System.Linq.Expressions;
 
 namespace eTickets_Web.Base
 {
     // Genel CRUD metotlarını buraya toplayacağız
     public class EntityBaseRepository<T> : IEntityBaseRepository<T> where T : class, IEntityBase, new()
     {
+        public EntityBaseRepository(AppDbContext context)
+        {
+        }
+
         public void Add(T entity)
         {
             throw new NotImplementedException();
