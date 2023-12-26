@@ -5,9 +5,9 @@ using eTickets_Web.Models;
 
 namespace eTickets_Web.Services
 {
-    public class ProducerService : EntityBaseRepository<Producer>, IProducerService
+    public class ProducersService : EntityBaseRepository<Producer>, IProducersService
     {
-        public ProducerService(AppDbContext context) : base(context)
+        public ProducersService(AppDbContext context) : base(context)
         {
                 
         }

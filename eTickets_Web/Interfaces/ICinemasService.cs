@@ -3,7 +3,7 @@ using eTickets_Web.Models;
 
 namespace eTickets_Web.Interfaces
 {
-    public interface ICinemaService : IEntityBaseRepository<Cinema>
+    public interface ICinemasService : IEntityBaseRepository<Cinema>
     {
     }
 }

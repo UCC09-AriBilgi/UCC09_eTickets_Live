@@ -3,7 +3,7 @@ using eTickets_Web.Models;
 
 namespace eTickets_Web.Interfaces
 {
-    public interface IProducerService : IEntityBaseRepository<Producer>
+    public interface IProducersService : IEntityBaseRepository<Producer>
     {
         Movie GetMovieById(int id);
 

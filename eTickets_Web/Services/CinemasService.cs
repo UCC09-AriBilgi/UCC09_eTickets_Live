@@ -5,9 +5,9 @@ using eTickets_Web.Models;
 
 namespace eTickets_Web.Services
 {
-    public class CinemaService : EntityBaseRepository<Cinema>,ICinemaService
+    public class CinemasService : EntityBaseRepository<Cinema>,ICinemasService
     {
-        public CinemaService(AppDbContext context) : base(context)
+        public CinemasService(AppDbContext context) : base(context)
         {
                 
         }
