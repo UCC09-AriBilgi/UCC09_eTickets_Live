@@ -104,6 +104,69 @@ namespace eTickets_Web.Data
 
 
                 }
+
+                //Producers table için dummy data
+                if(!context.Producers.Any())
+                {
+                    // Kayıt yok ...gel buraya
+                    context.Producers.AddRange(new List<Producer>()
+                    {
+                        // Örnek data kısmı
+                        new Producer()
+                        {
+                            FullName="Producer1",
+                            ProfilePictureURL="http://dotnethow.net/images/producers/producer-1.jpeg",
+                            Bio="This is Bio for Producer1"
+                        },
+                        new Producer()
+                        {
+                            FullName="Producer2",
+                            ProfilePictureURL="http://dotnethow.net/images/producers/producer-2.jpeg",
+                            Bio="This is Bio for Producer2"
+                        },
+                                                new Producer()
+                        {
+                            FullName="Producer3",
+                            ProfilePictureURL="http://dotnethow.net/images/producers/producer-3.jpeg",
+                            Bio="This is Bio for Producer3"
+                        },
+                                                                        new Producer()
+                        {
+                            FullName="Producer4",
+                            ProfilePictureURL="http://dotnethow.net/images/producers/producer-3.jpeg",
+                            Bio="This is Bio for Producer4"
+                        },
+                                                                        new Producer()
+                        {
+                            FullName="Producer5",
+                            ProfilePictureURL="http://dotnethow.net/images/producers/producer-5.jpeg",
+                            Bio="This is Bio for Producer5"
+                        },
+                    });
+
+                    context.SaveChanges(); // Örnek Producer datası yazıldı.
+                }
+
+                //Movies table için dummy data
+                if (!context.Movies.Any())
+                {
+                    // Kayıt yok ...gel buraya
+                    context.Movies.AddRange(new List<Movie>()
+                    {
+                        // Örnek data kısmı
+                        new Movie()
+                        {
+                            Name="Life",
+                            Description="This is the Life movie description",
+                            Price=39.50,
+                            ImageURL="http://dotnethow.net/images/movies/movie-3.jpeg",
+                            
+                        },
+
+                    }) ;
+
+                    context.SaveChanges(); // Örnek Actor datası yazıldı.
+                }
             } 
 
         }
