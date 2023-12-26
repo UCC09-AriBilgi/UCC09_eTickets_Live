@@ -1,6 +1,9 @@
 using eTickets_Web.Data;
 using eTickets_Web.Interfaces;
+using eTickets_Web.Models;
 using eTickets_Web.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,11 +17,21 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(buil
 // Service Configuration
 // Scoped (Kapsamlý) : Her service kapsamý için yeni bir instance(örnek) oluþturulur.
 // peakup.org
-builder.Services.AddScoped<IActorsService, ActorsService>();
-builder.Services.AddScoped<IProducersService, ProducersService>();
-builder.Services.AddScoped<ICinemasService, CinemasService>();
-builder.Services.AddScoped<IMoviesService,MoviesService>();
+//builder.Services.AddScoped<IActorsService, ActorsService>();
+//builder.Services.AddScoped<IProducersService, ProducersService>();
+//builder.Services.AddScoped<ICinemasService, CinemasService>();
+//builder.Services.AddScoped<IMoviesService, MoviesService>();
 
+// Authentication and Authorization
+builder.Services.AddIdentity<ApplicationUser,IdentityRole>()
+    .AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+builder.Services.AddAuthorization(options => 
+        {
+            options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+
+        });
 
 
 //
