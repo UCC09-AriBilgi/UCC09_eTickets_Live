@@ -2,6 +2,8 @@
 using eTickets_Web.Enums;
 using Microsoft.Extensions.DependencyInjection;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.Identity;
+using eTickets_Web.Static;
 
 namespace eTickets_Web.Data
 {
@@ -263,6 +265,41 @@ namespace eTickets_Web.Data
             using(var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 // Kullanıcı rolleri (admin,normal kullanıcımı)
+
+                var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+
+                if (!await roleManager.RoleExistsAsync(UserRoles.User))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+
+                // Users
+
+                var UserManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+                string adminUserEMail = "admin@etickets.com";
+
+                var adminUser=await UserManager.FindByEmailAsync(adminUserEMail);
+
+                if (adminUser==null)
+                {
+                    var newAdminUser = new ApplicationUser()
+                    {
+                        FullName = "Admin User",
+                        UserName = "admin-user",
+                        Email = adminUserEMail,
+                        EmailConfirmed = true
+                    };
+
+
+                }
+
+
+
+
+
+
 
             }
 
