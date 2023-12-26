@@ -1,4 +1,5 @@
 ﻿using eTickets_Web.Models;
+using eTickets_Web.Enums;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace eTickets_Web.Data
@@ -160,12 +161,75 @@ namespace eTickets_Web.Data
                             Description="This is the Life movie description",
                             Price=39.50,
                             ImageURL="http://dotnethow.net/images/movies/movie-3.jpeg",
-                            
+                            StartDate=DateTime.Now.AddDays(-10),
+                            EndDate=DateTime.Now.AddDays(10),
+                            CinemaId=3,
+                            ProducerId=3,
+                            MovieCategory = MovieCategory.Documentary
                         },
-
+                        new Movie()
+                        {
+                            Name="The Shawnshank Redemption",
+                            Description="This is the SR movie description",
+                            Price=29.50,
+                            ImageURL="http://dotnethow.net/images/movies/movie-1.jpeg",
+                            StartDate=DateTime.Now,
+                            EndDate=DateTime.Now.AddDays(30),
+                            CinemaId=1,
+                            ProducerId=1,
+                            MovieCategory = MovieCategory.Drama
+                        },
+                        new Movie()
+                        {
+                            Name="Ghost",
+                            Description="This is the Ghost movie description",
+                            Price=39.50,
+                            ImageURL="http://dotnethow.net/images/movies/movie-4.jpeg",
+                            StartDate=DateTime.Now,
+                            EndDate=DateTime.Now.AddDays(7),
+                            CinemaId=4,
+                            ProducerId=4,
+                            MovieCategory = MovieCategory.Horror
+                        },
+                        new Movie()
+                        {
+                            Name="Race",
+                            Description="This is the Race movie description",
+                            Price=39.50,
+                            ImageURL="http://dotnethow.net/images/movies/movie-6.jpeg",
+                            StartDate=DateTime.Now.AddDays(-10),
+                            EndDate=DateTime.Now.AddDays(-5),
+                            CinemaId=1,
+                            ProducerId=2,
+                            MovieCategory = MovieCategory.Documentary
+                        },
+                        new Movie()
+                        {
+                            Name="Scoob",
+                            Description="This is the Scoob movie description",
+                            Price=19.50,
+                            ImageURL="http://dotnethow.net/images/movies/movie-7.jpeg",
+                            StartDate=DateTime.Now.AddDays(-10),
+                            EndDate=DateTime.Now.AddDays(-2),
+                            CinemaId=1,
+                            ProducerId=3,
+                            MovieCategory = MovieCategory.Cartoon
+                        },
+                        new Movie()
+                        {
+                            Name="Cold Soles",
+                            Description="This is the Cold Soles movie description",
+                            Price=19.50,
+                            ImageURL="http://dotnethow.net/images/movies/movie-8.jpeg",
+                            StartDate=DateTime.Now.AddDays(3),
+                            EndDate=DateTime.Now.AddDays(20),
+                            CinemaId=1,
+                            ProducerId=5,
+                            MovieCategory = MovieCategory.Drama
+                        },
                     }) ;
 
-                    context.SaveChanges(); // Örnek Actor datası yazıldı.
+                    context.SaveChanges(); // Örnek Movie datası yazıldı.
                 }
             } 
 

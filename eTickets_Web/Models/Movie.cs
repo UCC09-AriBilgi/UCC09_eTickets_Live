@@ -1,4 +1,5 @@
 ﻿using eTickets_Web.Base;
+using eTickets_Web.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -27,6 +28,7 @@ namespace eTickets_Web.Models
         [Display(Name = "End Date")] // Viewlardaki ilgili alanın başındaki görünecek text
         public DateTime EndDate  { get; set; }
 
+        public MovieCategory MovieCategory { get; set; } // Enum bilgiler
         //Relationships
         // Many-to-many
         public List<Actor_Movie> Actors_Movies { get; set; }
