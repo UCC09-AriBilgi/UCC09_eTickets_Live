@@ -1,4 +1,4 @@
-﻿namespace eTickets_Web.Services
+﻿namespace eTickets_Web.Data.Services
 {
     public class MoviesService
     {

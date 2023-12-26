@@ -1,7 +1,7 @@
 using eTickets_Web.Data;
-using eTickets_Web.Interfaces;
+using eTickets_Web.Data.Interfaces;
 using eTickets_Web.Models;
-using eTickets_Web.Services;
+using eTickets_Web.Data.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

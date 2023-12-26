@@ -1,5 +1,5 @@
-﻿using eTickets_Web.Base;
-using eTickets_Web.Enums;
+﻿using eTickets_Web.Data.Base;
+using eTickets_Web.Data.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

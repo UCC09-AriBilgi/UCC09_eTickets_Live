@@ -1,4 +1,4 @@
-﻿namespace eTickets_Web.Base
+﻿namespace eTickets_Web.Data.Base
 {
     public interface IEntityBase
     {

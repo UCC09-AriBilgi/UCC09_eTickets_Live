@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
 
-namespace eTickets_Web.Base
+namespace eTickets_Web.Data.Base
 {
     // Genel CRUD metotlarını buraya toplayacağız
     public class EntityBaseRepository<T> : IEntityBaseRepository<T> where T : class, IEntityBase, new()
@@ -20,12 +20,12 @@ namespace eTickets_Web.Base
             _context.Set<T>().Add(entity); // Hangi model için o an işlem yapacağını öğrenebilmesi ve işlemini yapabilmesi için 
 
             _context.SaveChanges(); // Db tarafına gönderim için
-            
+
         }
 
         public void Delete(int id)
         {
-            var entity=_context.Set<T>().FirstOrDefault(x => x.Id == id);
+            var entity = _context.Set<T>().FirstOrDefault(x => x.Id == id);
 
             EntityEntry entityEntry = _context.Entry<T>(entity);
 
@@ -37,7 +37,7 @@ namespace eTickets_Web.Base
 
         public IEnumerable<T> GetAll()
         {
-            var result=_context.Set<T>().ToList();
+            var result = _context.Set<T>().ToList();
 
             return result;
         }

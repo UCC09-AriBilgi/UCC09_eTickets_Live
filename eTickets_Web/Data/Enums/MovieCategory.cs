@@ -1,4 +1,4 @@
-﻿namespace eTickets_Web.Enums
+﻿namespace eTickets_Web.Data.Enums
 {
     public enum MovieCategory
     {
@@ -6,7 +6,7 @@
 
         // normalde enum yapısı index değerini 0 dan tutar ..ama ben 1 den başlamasını istiyorum ki ilişkilendirmelere girecek
 
-        Action=1,
+        Action = 1,
         Comedy,
         Drama,
         Documentary,

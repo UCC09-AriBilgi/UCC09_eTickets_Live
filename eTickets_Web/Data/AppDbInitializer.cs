@@ -1,9 +1,9 @@
 ﻿using eTickets_Web.Models;
-using eTickets_Web.Enums;
 using Microsoft.Extensions.DependencyInjection;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Identity;
-using eTickets_Web.Static;
+using eTickets_Web.Data.Enums;
+using eTickets_Web.Data.Static;
 
 namespace eTickets_Web.Data
 {

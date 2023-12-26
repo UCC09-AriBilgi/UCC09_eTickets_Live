@@ -1,4 +1,4 @@
-﻿namespace eTickets_Web.Static
+﻿namespace eTickets_Web.Data.Static
 {
     // Sistem içersinde bulunacak olan kullanılara atanacak KullanıcıRollerini tanımlayacağım sınıf
 

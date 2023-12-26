@@ -1,8 +1,8 @@
 ﻿using System.Linq.Expressions;
 
-namespace eTickets_Web.Base
+namespace eTickets_Web.Data.Base
 {
-    public interface IEntityBaseRepository<T> where T : class,IEntityBase,new()
+    public interface IEntityBaseRepository<T> where T : class, IEntityBase, new()
     {
         // Ortak metotlar
 
@@ -19,7 +19,7 @@ namespace eTickets_Web.Base
         void Add(T entity);
 
         // Kayıt güncelleme
-        void Update(int id,T entity);
+        void Update(int id, T entity);
 
         // Kayıt silme..İlgili Modelden bunu çağıracağım için T yapısı kullanmadık
         void Delete(int id);
