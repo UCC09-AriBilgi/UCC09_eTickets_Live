@@ -1,6 +1,7 @@
 ﻿using eTickets_Web.Models;
 using eTickets_Web.Enums;
 using Microsoft.Extensions.DependencyInjection;
+using System.Security.Cryptography.X509Certificates;
 
 namespace eTickets_Web.Data
 {
@@ -255,6 +256,15 @@ namespace eTickets_Web.Data
                     context.SaveChanges(); // Örnek Movie datası yazıldı.
                 }
             } 
+        }
+
+        public static async Task SeedUsersAndRolesAsync(IApplicationBuilder applicationBuilder)
+        {
+            using(var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
+                // Kullanıcı rolleri (admin,normal kullanıcımı)
+
+            }
 
         }
 
