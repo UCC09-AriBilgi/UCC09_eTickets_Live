@@ -62,7 +62,7 @@ internal class Program
 
         // Seeding Database - Örnek datalarý oluþturulmasý
 
-        AppDbInitializer.Seed(app); // user data
+        //AppDbInitializer.Seed(app); // user data
         //AppDbInitializer.SeedUsersAndRolesAsync(app).Wait(); // user auth ????????
 
         app.Run();

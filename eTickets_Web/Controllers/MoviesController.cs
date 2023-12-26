@@ -22,8 +22,9 @@ namespace eTickets_Web.Controllers
         // GET: Movies
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Movies.Include(m => m.Cinema).Include(m => m.Producer);
-            return View(await appDbContext.ToListAsync());
+            var movieList = _context.Movies.Include(m => m.Cinema).Include(m => m.Producer);
+
+            return View(await movieList.ToListAsync());
         }
 
         // GET: Movies/Details/5
