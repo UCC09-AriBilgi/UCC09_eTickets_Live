@@ -25,7 +25,14 @@
 5. Örnek verilerle db nin yaratılabilmesi için bir AppDbInitializer.cs yaratalım
 
 
+2.gün
+-----
 
+Gerekli tüm controller ların üretilmesi
+Actor
+Cinema
+Movie
+Producer
 
 
 
