@@ -231,6 +231,29 @@ namespace eTickets_Web.Data
 
                     context.SaveChanges(); // Örnek Movie datası yazıldı.
                 }
+
+                //ActorMovies table için dummy data
+                if (!context.Actors_Movies.Any())
+                {
+                    // Kayıt yok ...gel buraya
+                    context.Actors_Movies.AddRange(new List<Actor_Movie>()
+                    {
+                        // Örnek data kısmı
+                        new Actor_Movie() { ActorId=1, MovieId=1 },
+                        new Actor_Movie() { ActorId=3, MovieId=1 },
+                        new Actor_Movie() { ActorId=1, MovieId=2 },
+                        new Actor_Movie() { ActorId=4, MovieId=2 },
+                        new Actor_Movie() { ActorId=1, MovieId=3 },
+                        new Actor_Movie() { ActorId=2, MovieId=3 },
+                        new Actor_Movie() { ActorId=5, MovieId=3 },
+                        new Actor_Movie() { ActorId=1, MovieId=4 },
+                        new Actor_Movie() { ActorId=4, MovieId=5 },
+                        new Actor_Movie() { ActorId=3, MovieId=5 },
+                        new Actor_Movie() { ActorId=4, MovieId=3 },
+                    });
+
+                    context.SaveChanges(); // Örnek Movie datası yazıldı.
+                }
             } 
 
         }
