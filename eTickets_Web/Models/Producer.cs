@@ -8,11 +8,11 @@ namespace eTickets_Web.Models
         [Key]
         public int Id { get ; set ; }
 
-        [Display(Name = "Profile Picture")] // Viewlardaki ilgili alanın başındaki görünecek text
+        [Display(Name = "Profil Foto")] // Viewlardaki ilgili alanın başındaki görünecek text
         [Required(ErrorMessage = "Profile picture alanı gereklidir...")]
         public string ProfilePictureURL { get; set; } // Actor resmi, int den gelecek
 
-        [Display(Name = "Full Name")] // Viewlardaki ilgili alanın başındaki görünecek text
+        [Display(Name = "Adı Soyadı")] // Viewlardaki ilgili alanın başındaki görünecek text
         [Required(ErrorMessage = "Tam ad alanı gereklidir...")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Ad bilgisi 3-50 karakter arasında olmalıdır..")]
         public string FullName { get; set; } // Actor tam adı

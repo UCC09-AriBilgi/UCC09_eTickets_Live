@@ -38,6 +38,12 @@ Producer
 
 3.gün (27.12.23)
 ----------------
+- Actor "
+- Cinema model tarafında ve index view da değişiklikler yapıldı. Interface yapısı implemente edildi.
+- Producer "
+
+- Bu 3 tablo daha basit bir yapıda idi. Fakat Movie modeli biraz farklı. Bu yüzden biraz daha farklı bir yönden yaklaşabiliriz.Yani ViewModel(DataTransferObject) yapısını kullanma durumu.
+
 
 
 

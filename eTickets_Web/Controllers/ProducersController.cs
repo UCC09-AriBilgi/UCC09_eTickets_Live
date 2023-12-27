@@ -7,24 +7,32 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eTickets_Web.Data;
 using eTickets_Web.Models;
+using eTickets_Web.Data.Interfaces;
 
 namespace eTickets_Web.Controllers
 {
     public class ProducersController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IProducersService _service;
 
-        public ProducersController(AppDbContext context)
+
+        public ProducersController(IProducersService service)
         {
-            _context = context;
+            _service = service;
+
         }
 
         // GET: Producers
         public async Task<IActionResult> Index()
         {
-              return _context.Producers != null ? 
-                          View(await _context.Producers.ToListAsync()) :
-                          Problem("Entity set 'AppDbContext.Producers'  is null.");
+            var producersdata = _service.GetAll();
+
+            return View(producersdata);
+
+              //return _context.Producers != null ? 
+              //            View(await _context.Producers.ToListAsync()) :
+              //            Problem("Entity set 'AppDbContext.Producers'  is null.");
         }
 
         // GET: Producers/Details/5
