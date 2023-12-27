@@ -128,7 +128,7 @@ namespace eTickets_Web.Data
                             ProfilePictureURL="http://dotnethow.net/images/producers/producer-2.jpeg",
                             Bio="This is Bio for Producer2"
                         },
-                                                new Producer()
+                        new Producer()
                         {
                             FullName="Producer3",
                             ProfilePictureURL="http://dotnethow.net/images/producers/producer-3.jpeg",
