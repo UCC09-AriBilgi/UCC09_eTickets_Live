@@ -21,9 +21,9 @@ internal class Program
         // Service Configuration
         // Scoped (Kapsamlý) : Her service kapsamý için yeni bir instance(örnek) oluþturulur.
         // peakup.org
-        //builder.Services.AddScoped<IActorsService, ActorsService>();
-        //builder.Services.AddScoped<IProducersService, ProducersService>();
-        //builder.Services.AddScoped<ICinemasService, CinemasService>();
+        builder.Services.AddScoped<IActorsService, ActorsService>();
+        builder.Services.AddScoped<IProducersService, ProducersService>();
+        builder.Services.AddScoped<ICinemasService, CinemasService>();
         //builder.Services.AddScoped<IMoviesService, MoviesService>();
 
         // Authentication and Authorization

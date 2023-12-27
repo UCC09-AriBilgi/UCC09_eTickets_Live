@@ -35,9 +35,10 @@ namespace eTickets_Web.Data.Base
 
         }
 
+        // üzerine gelen T tipine (data) göre ilgili modelden verileri çeker.
         public IEnumerable<T> GetAll()
         {
-            var result = _context.Set<T>().ToList();
+            var result = _context.Set<T>().ToList(); // T üzerinden gelen modele göre oraya konumlanıp içeriği bir listeye döker.
 
             return result;
         }

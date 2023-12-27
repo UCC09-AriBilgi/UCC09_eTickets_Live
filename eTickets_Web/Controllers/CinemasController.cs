@@ -18,13 +18,19 @@ namespace eTickets_Web.Controllers
 
         public CinemasController(ICinemasService service)
         {
-            _service = service;
+            _service = service; // service Interfaceinden yararlandığım için veri tarafına bağlanmamı sağlayan AppDbContext i burada ayrı olarak tanımlamaya gerek yok. Çünkü zaten Interface kısmında tanımlı
+
             //_context = context;
         }
 
         // GET: Cinemas
         public async Task<IActionResult> Index()
         {
+            var cinemasdata = _service.GetAll();
+
+            return View(cinemasdata);
+
+
 
               //return _context.Cinemas != null ? 
               //            View(await _context.Cinemas.ToListAsync()) :
