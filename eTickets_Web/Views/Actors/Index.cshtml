@@ -1,7 +1,12 @@
-﻿@model IEnumerable<eTickets_Web.Models.Actor>
+﻿@* Controller tarafından gönderilen veri setinin burada tanımlanması gerekiyor ki view içersinde gerekli yerlerde kullanılabilsin *@
+
+@* @model List<eTickets_Web.Models.Actor> *@
+
+
+@model IEnumerable<eTickets_Web.Models.Actor>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "List of Actors";
 }
 
 <h1>Index</h1>
@@ -25,7 +30,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ProfilePictureURL)

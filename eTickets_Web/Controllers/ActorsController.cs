@@ -22,9 +22,15 @@ namespace eTickets_Web.Controllers
         // GET: Actors
         public async Task<IActionResult> Index()
         {
-              return _context.Actors != null ? 
-                          View(await _context.Actors.ToListAsync()) :
-                          Problem("Entity set 'AppDbContext.Actors'  is null.");
+            // Actor tablosunu Db tarafından okuyup View tarafına gönderiyor. 
+
+            var actorsdata = _context.Actors.ToList();
+
+            return View(actorsdata); // actorsdata içeriğini gönder
+
+              //return _context.Actors != null ? 
+              //            View(await _context.Actors.ToListAsync()) :
+              //            Problem("Entity set 'AppDbContext.Actors'  is null.");
         }
 
         // GET: Actors/Details/5

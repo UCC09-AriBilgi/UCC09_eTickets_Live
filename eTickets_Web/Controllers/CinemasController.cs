@@ -7,24 +7,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eTickets_Web.Data;
 using eTickets_Web.Models;
+using eTickets_Web.Data.Interfaces;
 
 namespace eTickets_Web.Controllers
 {
     public class CinemasController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly ICinemasService _service;
 
-        public CinemasController(AppDbContext context)
+        public CinemasController(ICinemasService service)
         {
-            _context = context;
+            _service = service;
+            //_context = context;
         }
 
         // GET: Cinemas
         public async Task<IActionResult> Index()
         {
-              return _context.Cinemas != null ? 
-                          View(await _context.Cinemas.ToListAsync()) :
-                          Problem("Entity set 'AppDbContext.Cinemas'  is null.");
+
+              //return _context.Cinemas != null ? 
+              //            View(await _context.Cinemas.ToListAsync()) :
+              //            Problem("Entity set 'AppDbContext.Cinemas'  is null.");
         }
 
         // GET: Cinemas/Details/5
