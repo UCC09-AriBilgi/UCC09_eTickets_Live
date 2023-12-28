@@ -1,14 +1,14 @@
 ﻿@using eTickets_Web.Data.ViewModels;
-@model LoginVM;
+@model RegisterVM;
 
 @{
-    ViewData["Title"] = ".: Sisteme Giriş :.";
+    ViewData["Title"] = ".: Sisteme Kayıt :.";
 }
 
 <div class="row">
     <div class="col-md-6 offset-3">
         <p>
-            <h4>Hesap Girişi</h4>
+            <h4>Yeni Hesap Tanımlama</h4>
         </p>
 
         @if (TempData["Error"] != null) // bir hata oluşmuşsa
@@ -25,18 +25,31 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="form-group">
+                        <label asp-for="FullName" class="control-label"></label>
+                        <input asp-for="FullName" class="form-control" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
                         <label asp-for="EMailAddress" class="control-label"></label>
                         <input asp-for="EMailAddress" class="form-control" />
                         <span asp-validation-for="EMailAddress" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label asp-for="Password" class="control-label"></label>
                         <input asp-for="Password" class="form-control" />
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword" class="control-label"></label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
 
                     <div class="form-group mt-3">
-                        <input class="btn btn-outline-success float-end" type="submit" value="Login"/>
+                        <input class="btn btn-outline-success float-end" type="submit" value="Kayıt" />
                         <a class="btn btn-outline-secondary" asp-controller="Movies" asp-action="Index">Vazgeç</a>
                     </div>
                 </form>
@@ -44,4 +57,3 @@
         </div>
     </div>
 </div>
-

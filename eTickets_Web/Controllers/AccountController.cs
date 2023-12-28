@@ -67,7 +67,9 @@ namespace eTickets_Web.Controllers
         // GET: Register ekranı
         public ActionResult Register()
         {
-            return View();
+            var response=new RegisterVM();
+
+            return View(response);
         }
 
         // POST: AccountController/Edit/5
