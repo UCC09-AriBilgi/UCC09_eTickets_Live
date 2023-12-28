@@ -45,5 +45,11 @@ Producer
 - Bu 3 tablo daha basit bir yapıda idi. Fakat Movie modeli biraz farklı. Bu yüzden biraz daha farklı bir yönden yaklaşabiliriz.Yani ViewModel(DataTransferObject) yapısını kullanma durumu.
 
 
+4.gün (28.12.23)
+----------------
+- Ana ekranda Kullanıcı Giriş/Kayıt bölümlerinin yapılması
+
+- Buna göre sisteme giren kullanıcı tipine göre frontend tarafında yapılacak değişiklikler
+
 
 
