@@ -1,4 +1,5 @@
 ﻿using eTickets_Web.Data;
+using eTickets_Web.Data.ViewModels;
 using eTickets_Web.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -31,23 +32,6 @@ namespace eTickets_Web.Controllers
 
 
 
-        // GET: AccountController
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: AccountController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: AccountController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
         // POST: AccountController/Create
         [HttpPost]
