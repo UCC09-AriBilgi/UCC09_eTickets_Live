@@ -1,5 +1,6 @@
 ﻿using eTickets_Web.Data;
 using eTickets_Web.Data.ViewModels;
+using eTickets_Web.Data.Static;
 using eTickets_Web.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -20,7 +21,7 @@ namespace eTickets_Web.Controllers
             _context = context;  
         }
 
-        // Login kısmı
+        // Login view(get) kısmı
         public IActionResult Login()
         {
             var response = new LoginVM();
@@ -28,28 +29,43 @@ namespace eTickets_Web.Controllers
             return View(response);
         }
 
-
-
-
-
-
-        // POST: AccountController/Create
+        // POST: AccountController/Login
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Login(LoginVM loginVM)
         {
-            try
+            // Öncelikle Modelimin içerği geçerli bir içerik mi
+            if (!ModelState.IsValid) return View(loginVM);
+
+            // view ekranından girilmiş olan email adresi kayıtlarımda mevcut mu
+            var user = await _userManager.FindByEmailAsync(loginVM.EMailAddress);
+
+            if (user != null) // Kullanıcının varolması durumu
             {
-                return RedirectToAction(nameof(Index));
+                var passwordCheck = await _userManager.CheckPasswordAsync(user, loginVM.Password); // Password değeri kontrol edilicek
+
+                if (passwordCheck) // true? false?
+                {
+                    var result = await _signinManager.PasswordSignInAsync(user, loginVM.Password,false,false);
+
+                    if (result.Succeeded) // eğer başarılıysa
+                    {
+                        return RedirectToAction("Index", "Movies"); // herşey doğruysa Movies'e git film listesini göster)
+                    }
+
+                    TempData["Error"] = "Yanlış kullanıcı adı veya şifre..Lütfen tekrar deneyiniz..";
+
+                    return View(loginVM);
+                }
             }
-            catch
-            {
-                return View();
-            }
+
+            TempData["Error"] = "Yanlış kullanıcı adı veya şifre..Lütfen tekrar deneyiniz..";
+
+            return View(loginVM);
         }
 
-        // GET: AccountController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Register ekranı
+        public ActionResult Register()
         {
             return View();
         }
