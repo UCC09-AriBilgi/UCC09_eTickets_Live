@@ -10,6 +10,9 @@ namespace eTickets_Web.Data.Services
         {
         }
 
-
+        public Movie GetMovieById(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
