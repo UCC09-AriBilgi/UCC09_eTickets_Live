@@ -72,6 +72,52 @@ namespace eTickets_Web.Controllers
             return View(response);
         }
 
+        // POST: Register ekranı
+        // Burada Register ekranından alınan bilgiler POST action vasıtasıyla buraya düşecekler.
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterVM registerVM)
+        {
+            // Öncelikle View tarafından Post edilen veri yapısı (model) uygun durumda mı?
+
+            if (!ModelState.IsValid)
+            {
+                // Uygun değilse
+                return View(registerVM);
+            }
+
+            var user = await _userManager.FindByEmailAsync(registerVM.EMailAddress);
+            // eğer kullanıcı ilk defa kayıt oluyorsa bu değerin null olması lazım.
+
+            // eğer varsa
+            if (user != null)
+            {
+                TempData["Error"] = "Böyle bir kullanıcı zaten mevcut...Farklı değerler kullanınız...";
+                return View(registerVM);
+            }
+
+            var newUser = new ApplicationUser()
+            {
+                // View tarafından gelenler
+                FullName = registerVM.FullName,
+                Email = registerVM.EMailAddress,
+                UserName = registerVM.EMailAddress
+            };
+
+            // Bir kayıt işlemi yapılacak. Bunun doğru yapılıp yapılmadığını kontrol edelim.
+
+            var newUserResponse = await _userManager.CreateAsync(newUser, registerVM.Password);
+
+            if (newUserResponse.Succeeded) // İşlem başarılı ise
+            {
+                await _userManager.AddToRoleAsync(newUser, UserRoles.User); // Direk saf kullanıcı rol verildi
+
+
+            }
+
+            return View("RegisterCompleted");
+
+        }
+
         // POST: AccountController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]

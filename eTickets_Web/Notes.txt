@@ -52,4 +52,7 @@ Producer
 - Buna göre sisteme giren kullanıcı tipine göre frontend tarafında yapılacak değişiklikler
 
 
+5.gün (02.01.2024)
+------------------
+
 
