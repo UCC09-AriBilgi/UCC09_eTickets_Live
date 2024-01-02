@@ -9,6 +9,7 @@ namespace eTickets_Web.Data.Interfaces
 
         // ilerleyen kısımlarda özellikle View tarafın kullanacağımız View-Models(VM) de kullanılmak üzere
 
+        // Yeni bir movie tanımlada kullanılacak dropdownlist yapıları
         //NewMovieDropdownsVM GetNewMovieDropdownsValues();
 
         //Movie AddNewMovie(NewMovieVM data);

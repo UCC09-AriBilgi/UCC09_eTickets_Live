@@ -7,8 +7,10 @@ namespace eTickets_Web.Data.Services
 {
     public class ActorsService : EntityBaseRepository<Actor>, IActorsService
     {
+        // Dependency Injection
         public ActorsService(AppDbContext context) : base(context)
         {
+
         }
 
 

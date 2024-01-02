@@ -34,7 +34,7 @@ namespace eTickets_Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginVM loginVM)
         {
-            // Öncelikle Modelimin içerği geçerli bir içerik mi
+            // Öncelikle Modelimin içeriği geçerli bir içerik mi
             if (!ModelState.IsValid) return View(loginVM);
 
             // view ekranından girilmiş olan email adresi kayıtlarımda mevcut mu

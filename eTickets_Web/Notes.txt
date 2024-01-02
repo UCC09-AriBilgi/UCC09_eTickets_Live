@@ -55,4 +55,19 @@ Producer
 5.gün (02.01.2024)
 ------------------
 
+Normalde veri alışverişini controllerler üzerinden yapıldığı durumlar vardır. Bazen bu pek doğru bir yol olmayabilir. Bunun yerine bu tür benzer işleri gerçekleştirebilecek olan Interface-Servis(Service) yapısını adapte etmek daha doğru olacaktır. Yani gerçekleştirilecek durumları daha geri plana almak (güvenlik açısından) yerinde olabilir.
+
+* Actor bilgileriyle çalışma
+	Bunun için öncelikle Data/Interfaces dizini altına IActorsService interface'i yaratalım. Sonrasında da Data/Services altında ActorsService isimli classı oluşturuyoruz.
+
+* Cinema bilgileriyle çalışma
+	Bunun için öncelikle Data/Interfaces dizini altına ICinemasService interface'i yaratalım. Sonrasında da Data/Services altında CinemasService isimli classı oluşturuyoruz.
+
+* Producer bilgileriyle çalışma
+	Bunun için öncelikle Data/Interfaces dizini altına IProducersService interface'i yaratalım. Sonrasında da Data/Services altında ProducersService isimli classı oluşturuyoruz.
+
+* Movie bilgileriyle çalışma
+	Bunun için öncelikle Data/Interfaces dizini altına IMoviesService interface'i yaratalım. Sonrasında da Data/Services altında MoviessService isimli classı oluşturuyoruz.
+	Bu interfacein yapısı diğerlerinden farklı . çünkü db tablosu biraz farklı yapıda .İlişkilendirmeler var.Kodlarda ona göre değişiklik gösteriyor.
+
 

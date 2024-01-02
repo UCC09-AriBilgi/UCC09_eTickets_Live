@@ -1,3 +1,7 @@
-﻿02.01.24 - Kullanıcı Register olmuyor..
---- Kullanıcı kayıt etme kısmı daha henüz yazılmamış gibi duruyor.
+﻿+ 02.01.24 - Kullanıcı Register olmuyor..
+ Kullanıcı kayıt etme kısmı daha henüz yazılmamış gibi duruyor.
+
+- 02.01.24 - Giren kullanıcının kim olduğu anlaşılamıyor.
+
+
 
