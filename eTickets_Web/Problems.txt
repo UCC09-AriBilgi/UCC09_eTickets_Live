@@ -3,5 +3,7 @@
 
 - 02.01.24 - Giren kullanıcının kim olduğu anlaşılamıyor.
 
+- 04.01.24 - Authentication Kullanıcının admin olduğunu bulamama??
+
 
 

@@ -18,7 +18,7 @@ namespace eTickets_Web.Controllers
 
     public class ActorsController : Controller
     {
-        //private readonly AppDbContext _context;
+        private readonly AppDbContext _context;
 
         // artık olayı genel yapıdan servis yapısına döndüreceğim için
         // genel context yapısını kullanmak yerine zaten servis üzerinde tanımlanmış sekilde IActorsService yapısısı kullan.
@@ -47,7 +47,7 @@ namespace eTickets_Web.Controllers
         }
 
         // GET: Actors/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null || _context.Actors == null)
             {
