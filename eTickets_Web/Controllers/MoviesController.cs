@@ -19,6 +19,7 @@ namespace eTickets_Web.Controllers
     public class MoviesController : Controller
     {
         private readonly IMoviesService _service;
+        private readonly AppDbContext _context;
 
         public MoviesController(IMoviesService service)
         {
@@ -173,6 +174,26 @@ namespace eTickets_Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, NewMovieVM movie)
         {
+            if (id != movie.Id)
+            {
+                return View("NotFound"); // eğer ilgili movie değilsse
+            }
+
+            if (!ModelState.IsValid)
+            {
+                var movieDropdownsData = _service.GetNewMovieDropdownsValues();
+
+                ViewBag.Cinemas = new SelectList(movieDropdownsData.Cinemas, "Id", "Name");
+                ViewBag.Producers = new SelectList(movieDropdownsData.Producers, "Id", "FullName");
+                ViewBag.Actors = new SelectList(movieDropdownsData.Actors, "Id", "FullName");
+
+                return View(movie);
+
+            }
+
+            _service.UpdateMovie(movie); // view dan gelen data postalanıyor.
+
+            return RedirectToAction(nameof(Index));
 
 
             // Old
