@@ -1,4 +1,5 @@
 ﻿using eTickets_Web.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
 
@@ -14,6 +15,8 @@ namespace eTickets_Web.Data.Base
             _context = context;
         }
 
+        // Hepsi için (Actor,Cinema,Movie,Producer)
+        // Bu metodun istediği tek şey model - T(Actor,Cinema,Producer
         public void Add(T entity)
         {
             // Üzerine gelen T Type buradaki modelim
@@ -43,19 +46,29 @@ namespace eTickets_Web.Data.Base
             return result;
         }
 
+        // Polymorphism -- Parametreli olarak listeleme
         public IEnumerable<T> GetAll(params Expression<Func<T, object>>[] includeProperties)
         {
-            throw new NotImplementedException();
+            // Burası da herhangi bir parametreli şekilde VT tarafından listeleme yapılmak istendiğinde kullanılacak metot.
+            IQueryable<T> query = _context.Set<T>();
+
+            // buraya gelen parametrelere göre sorgu dinamik şekilde oluşturuluyor.
+            query = includeProperties.Aggregate(query, (current, includeProperties) => current.Include(includeProperties));
+
+            return query.ToList();
+            
         }
 
-        public T GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
+        // üzerine gelen id parametresine göre şu an bilinmiyor çağıran servis hangi servisse T type o tablo olacak. ve o tablodan id ye göre sorgulama yapacak...
+        public T GetById(int id) => _context.Set<T>().FirstOrDefault(n => n.Id == id);
 
+        // üzerine gelen id ve model(T) parametrelerine göre güncelleme işlemi yapar.
         public void Update(int id, T entity)
         {
-            throw new NotImplementedException();
+            EntityEntry entityEntry=_context.Entry<T>(entity); // buraya gelen T ye göre
+            entityEntry.State=EntityState.Modified;
+            _context.SaveChanges();
+
         }
     }
 }
