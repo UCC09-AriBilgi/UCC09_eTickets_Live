@@ -5,5 +5,7 @@
 
 - 04.01.24 - Authentication Kullanıcının admin olduğunu bulamama??
 
+- 04.01.24 - Kullanıcı normal user da olsa create new linki gözüküyor(movie sayfasında)
+
 
 
