@@ -7,53 +7,101 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eTickets_Web.Data;
 using eTickets_Web.Models;
+using Microsoft.AspNetCore.Authorization;
+using eTickets_Web.Data.Static;
+using eTickets_Web.Data.Interfaces;
+using eTickets_Web.Data.ViewModels;
 
 namespace eTickets_Web.Controllers
 {
+    [Authorize(Roles =UserRoles.Admin)]
+
     public class MoviesController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IMoviesService _service;
 
-        public MoviesController(AppDbContext context)
+        public MoviesController(IMoviesService service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: Movies
+        [AllowAnonymous] // Bu Index sayfasına herkes ulaşabilir
         public async Task<IActionResult> Index()
         {
-            var movieList = _context.Movies
-                .Include(m => m.Cinema)
-                .Include(m => m.Producer);
+            //var movieList = _context.Movies
+            //    .Include(m => m.Cinema)
+            //    .Include(m => m.Producer);
 
-            return View(await movieList.ToListAsync());
+            //return View(await movieList.ToListAsync());
+
+            var allmovies = _service.GetAll(c => c.Cinema); // Include yapısı içerecek. EntityBaseRepository.cs altında
+
+            return View(allmovies);
+
+        }
+
+        // Movies ler için arama işlemi
+        [AllowAnonymous]
+        public IActionResult Filter(string searchString)
+        {
+            var allMovies = _service.GetAll(n => n.Cinema);
+
+            // Bana gelen parametre-searchString boş/dolu mu
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                // asağıda LINQ yapısı kullanılıyor.
+                // Movie adı ve description ı üzerinde arama işlemi
+                var filteredResultNew=allMovies.Where(n=> string.Equals(n.Name, searchString, StringComparison.CurrentCultureIgnoreCase) || string.Equals(n.Description, searchString,StringComparison.CurrentCultureIgnoreCase)).ToList();
+
+                return View("Index",filteredResultNew);
+            }
+
+            // eğer parametre boş geliyorsa tüm filmleri listele
+
+            return View("Index", allMovies);
+
         }
 
         // GET: Movies/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null || _context.Movies == null)
-            {
-                return NotFound();
-            }
+            // Eski yapı
+            //if (id == null || _context.Movies == null)
+            //{
+            //    return NotFound();
+            //}
 
-            var movie = await _context.Movies
-                .Include(m => m.Cinema)
-                .Include(m => m.Producer)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
-            {
-                return NotFound();
-            }
+            //var movie = await _context.Movies
+            //    .Include(m => m.Cinema)
+            //    .Include(m => m.Producer)
+            //    .FirstOrDefaultAsync(m => m.Id == id);
+            //if (movie == null)
+            //{
+            //    return NotFound();
+            //}
 
-            return View(movie);
+            //return View(movie);
+
+            var movieDetail = _service.GetMovieById(id);
+
+            return View(movieDetail);
         }
 
+        // Create işlemini sadece admin yetkisine sahip olan kullanıcı yapabilecektir.
         // GET: Movies/Create
         public IActionResult Create()
         {
-            ViewData["CinemaId"] = new SelectList(_context.Cinemas, "Id", "Name");
-            ViewData["ProducerId"] = new SelectList(_context.Producers, "Id", "Bio");
+            var movieDropdownData = _service.GetNewMovieDropdownsValues(); // movie servisinde olacak
+
+            // ekranda görüleek select lerim
+            ViewBag.Cinemas=new SelectList(movieDropdownData.Cinemas,"Id","Name");
+            ViewBag.Producers=new SelectList(movieDropdownData.Producers,"Id","FullName");
+            ViewBag.Actors=new SelectList(movieDropdownData.Actors,"Id","FullName");
+
+            //ViewData["CinemaId"] = new SelectList(_context.Cinemas, "Id", "Name");
+            //ViewData["ProducerId"] = new SelectList(_context.Producers, "Id", "Bio");
+
             return View();
         }
 
@@ -62,35 +110,60 @@ namespace eTickets_Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,ImageURL,StartDate,EndDate,MovieCategory,CinemaId,ProducerId")] Movie movie)
+        public async Task<IActionResult> Create(NewMovieVM movie)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(movie);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var movieDropdownsData = _service.GetNewMovieDropdownsValues();
+
+                // ekranda görüleek select lerim
+                ViewBag.Cinemas = new SelectList(movieDropdownsData.Cinemas, "Id", "Name");
+                ViewBag.Producers = new SelectList(movieDropdownsData.Producers, "Id", "FullName");
+                ViewBag.Actors = new SelectList(movieDropdownsData.Actors, "Id", "FullName");
+
+                return View(movie);
             }
-            ViewData["CinemaId"] = new SelectList(_context.Cinemas, "Id", "Name", movie.CinemaId);
-            ViewData["ProducerId"] = new SelectList(_context.Producers, "Id", "Bio", movie.ProducerId);
-            return View(movie);
+
+            _service.AddNewMovie(movie);
+
+            return RedirectToAction(nameof(Index));
+
         }
 
+        // Edit kısmını da sadece admin yapabilir.
         // GET: Movies/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _context.Movies == null)
+            var movieDetails=_service.GetMovieById(id);
+
+            if (movieDetails == null)
             {
-                return NotFound();
+                return View("NotFound");
             }
 
-            var movie = await _context.Movies.FindAsync(id);
-            if (movie == null)
+            // üzerinde değişklik yapılma
+            var response = new NewMovieVM()
             {
-                return NotFound();
-            }
-            ViewData["CinemaId"] = new SelectList(_context.Cinemas, "Id", "Name", movie.CinemaId);
-            ViewData["ProducerId"] = new SelectList(_context.Producers, "Id", "Bio", movie.ProducerId);
-            return View(movie);
+                Id = movieDetails.Id,
+                Name = movieDetails.Name,
+                Description = movieDetails.Description,
+                Price = movieDetails.Price,
+                StartDate = movieDetails.StartDate,
+                EndDate = movieDetails.EndDate,
+                ImageURL = movieDetails.ImageURL,
+                MovieCategory = movieDetails.MovieCategory,
+                CinemaId = movieDetails.CinemaId,
+                ProducerId = movieDetails.ProducerId,
+                ActorIds = movieDetails.Actors_Movies.Select(n => n.ActorId).ToList()
+            };
+
+            var movieDropdownsData = _service.GetNewMovieDropdownsValues();
+
+            ViewBag.Cinemas = new SelectList(movieDropdownsData.Cinemas, "Id", "Name");
+            ViewBag.Producers = new SelectList(movieDropdownsData.Producers, "Id", "FullName");
+            ViewBag.Actors = new SelectList(movieDropdownsData.Actors, "Id", "FullName");
+
+            return View(response);
         }
 
         // POST: Movies/Edit/5
@@ -98,36 +171,39 @@ namespace eTickets_Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Price,ImageURL,StartDate,EndDate,MovieCategory,CinemaId,ProducerId")] Movie movie)
+        public async Task<IActionResult> Edit(int id, NewMovieVM movie)
         {
-            if (id != movie.Id)
-            {
-                return NotFound();
-            }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(movie);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MovieExists(movie.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CinemaId"] = new SelectList(_context.Cinemas, "Id", "Name", movie.CinemaId);
-            ViewData["ProducerId"] = new SelectList(_context.Producers, "Id", "Bio", movie.ProducerId);
-            return View(movie);
+
+            // Old
+            //if (id != movie.Id)
+            //{
+            //    return NotFound();
+            //}
+
+            //if (ModelState.IsValid)
+            //{
+            //    try
+            //    {
+            //        _context.Update(movie);
+            //        await _context.SaveChangesAsync();
+            //    }
+            //    catch (DbUpdateConcurrencyException)
+            //    {
+            //        if (!MovieExists(movie.Id))
+            //        {
+            //            return NotFound();
+            //        }
+            //        else
+            //        {
+            //            throw;
+            //        }
+            //    }
+            //    return RedirectToAction(nameof(Index));
+            //}
+            //ViewData["CinemaId"] = new SelectList(_context.Cinemas, "Id", "Name", movie.CinemaId);
+            //ViewData["ProducerId"] = new SelectList(_context.Producers, "Id", "Bio", movie.ProducerId);
+            //return View(movie);
         }
 
         // GET: Movies/Delete/5
