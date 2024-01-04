@@ -7,24 +7,37 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eTickets_Web.Data;
 using eTickets_Web.Models;
+using Microsoft.AspNetCore.Authorization;
+using eTickets_Web.Data.Static;
+using eTickets_Web.Data.Interfaces;
 
 namespace eTickets_Web.Controllers
 {
+    // Bu controllerın injecte edilmiş Identity alt-yapısını kullanabilmesini sağlamak ve bizim kendi yapımızla UserRoles.cs birleştirebilmek için
+    [Authorize(Roles =UserRoles.Admin)]
+
     public class ActorsController : Controller
     {
-        private readonly AppDbContext _context;
+        //private readonly AppDbContext _context;
 
-        public ActorsController(AppDbContext context)
+        // artık olayı genel yapıdan servis yapısına döndüreceğim için
+        // genel context yapısını kullanmak yerine zaten servis üzerinde tanımlanmış sekilde IActorsService yapısısı kullan.
+        private readonly IActorsService _service;
+
+        //public ActorsController(AppDbContext context)
+        public ActorsController(IActorsService service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: Actors
+        [AllowAnonymous] // Herhangi bir yetkilendirme kullanılmıyor.
         public async Task<IActionResult> Index()
         {
             // Actor tablosunu Db tarafından okuyup View tarafına gönderiyor. 
 
-            var actorsdata = _context.Actors.ToList();
+            //var actorsdata = _context.Actors.ToList();
+            var actorsdata = _service.GetAll(); 
 
             return View(actorsdata); // actorsdata içeriğini gönder
 
@@ -60,33 +73,54 @@ namespace eTickets_Web.Controllers
         // POST: Actors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Create View tarafından gönderilen veriyi burası yakalıyor
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ProfilePictureURL,FullName,Bio")] Actor actor)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(actor);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // Modelim uygyun değilse varolan ekran yine ekranda kalacak
+                return View(actor);
             }
-            return View(actor);
+
+            //_context.Add(actor);
+            _service.Add(actor);
+
+            //await _context.SaveChangesAsync(); zaten servisin altında var
+
+            return RedirectToAction(nameof(Index));
+
         }
 
         // GET: Actors/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _context.Actors == null)
+            // Eski yapı
+            //if (id == null || _context.Actors == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //var actor = await _context.Actors.FindAsync(id);
+            //if (actor == null)
+            //{
+            //    return NotFound();
+            //}
+            //return View(actor);
+
+
+            var actorDetails = _service.GetById(id);
+
+            if (actorDetails == null)
             {
-                return NotFound();
+                return View("NotFound");
+            }
+            else
+            {
+                return View(actorDetails);
             }
 
-            var actor = await _context.Actors.FindAsync(id);
-            if (actor == null)
-            {
-                return NotFound();
-            }
-            return View(actor);
         }
 
         // POST: Actors/Edit/5

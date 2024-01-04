@@ -75,3 +75,6 @@ Bu yazılanların birer servis olarak hizmet edebilmesi için Program.cs altınd
 
 6.gün (04.01.2024)
 -------------------
+Gerekli bazı metotsal düzenlemelerin EntityBaseRepository.cs altında yapılması
+GetAll...
+
