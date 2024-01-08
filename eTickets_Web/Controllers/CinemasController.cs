@@ -66,15 +66,18 @@ namespace eTickets_Web.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Logo,Name,Description")] Cinema cinema)
+        public async Task<IActionResult> Create([Bind("Logo,Name,Description")] Cinema cinema)
         {
-            if (ModelState.IsValid)
+            //Invalid geliyor
+            if (!ModelState.IsValid)
             {
-                _context.Add(cinema);
-                await _context.SaveChangesAsync();
+                return View(cinema);
+            }
+            else
+            {
+                _service.Add(cinema);
                 return RedirectToAction(nameof(Index));
             }
-            return View(cinema);
         }
 
         // GET: Cinemas/Edit/5

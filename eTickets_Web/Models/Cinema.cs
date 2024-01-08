@@ -9,19 +9,19 @@ namespace eTickets_Web.Models
         public int Id { get ; set ; }
 
         [Display(Name = "Logo")] // Viewlardaki ilgili alanın başındaki görünecek text
-        public string Logo { get; set; } // Cinema logo
+        public string? Logo { get; set; } // Cinema logo
 
         [Display(Name = "Sinema Adı")] // Viewlardaki ilgili alanın başındaki görünecek text
         [Required(ErrorMessage = "Sinema adı gereklidir...")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Cinema Ad bilgisi 3-50 karakter arasında olmalıdır..")]
-        public string Name { get; set; } // Cinema adı
+        public string? Name { get; set; } // Cinema adı
 
         [Display(Name = "Sinema Detay")] // Viewlardaki ilgili alanın başındaki görünecek text
-        public string Description { get; set; } // Cinema desc
+        public string? Description { get; set; } // Cinema desc
 
         //Relationships
         //Bu sinemada oynayan filimler
-        public List<Movie> Movies { get; set; } // bir cinemada birçok film olabilir..
+        public List<Movie>? Movies { get; set; } // bir cinemada birçok film olabilir..
 
 
     }

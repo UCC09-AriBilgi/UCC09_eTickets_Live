@@ -9,7 +9,12 @@
     ViewData["Title"] = "List of Actors";
 }
 
-@Html.Partial("_CreateItem", "Actors")
+@* Normalde burada partial view olacak *@
+<div style="position : fixed;left:25px;top:25px;" class="text-white">
+    <a asp-controller="Actors" asp-action="Create" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> Yeni Kayıt
+    </a>
+</div>
 
 <table class="table">
     <thead>
@@ -47,3 +52,5 @@
 }
     </tbody>
 </table>
+
+@* @Html.Partial("_CreateItem", "Actors") *@

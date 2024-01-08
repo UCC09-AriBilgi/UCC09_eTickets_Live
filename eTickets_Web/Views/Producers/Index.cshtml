@@ -4,8 +4,12 @@
     ViewData["Title"] = "List of Producers";
 }
 
+<div style="position : fixed;left:25px;top:25px;" class="text-white">
+    <a asp-controller="Producers" asp-action="Create" class="btn btn-success">
+        <i class="bi bi-plus-circle"></i> Yeni Kayıt
+    </a>
+</div>
 
-@Html.Partial("_CreateItem", "Producers")
 
 <table class="table">
     <thead>
@@ -45,3 +49,6 @@
 }
     </tbody>
 </table>
+
+
+@Html.Partial("_CreateItem","Producers")
