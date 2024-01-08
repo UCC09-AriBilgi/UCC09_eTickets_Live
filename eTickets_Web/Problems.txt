@@ -8,4 +8,7 @@
 -* 04.01.24 - Kullanıcı normal user da olsa "create new" linki gözüküyor(movie sayfasında)
 
 
+- 08.01.24 _ Header kısmında Management bölümünün çıkmaması
+- 08.01.24 _ Yeni movie,actor,cinema,producer
+
 

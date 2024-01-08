@@ -25,12 +25,27 @@
                         </li>
 @*                         Actors/Cinemas/Producers menülerinin giren kullanıcının durumuna göre göster/gizle durumu *@
 
-                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toogle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-gear"></i> Management
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="Cinemas" asp-action="Index"><i class="bi bi-camera-reels"></i> Cinemas</a>
+                            </div>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="Producers" asp-action="Index"><i class="bi bi-headset"></i> Producers</a>
+                            </div>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="Actors" asp-action="Index"><i class="bi bi-person-square"></i> Actors</a>
+                            </div>
+
+                        </li>
+
+@*                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toogle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="bi bi-gear"></i> Management
-
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" asp-controller="Cinemas" asp-action="Index"><i class="bi bi-camera-reels"></i> Cinemas</a>
@@ -44,7 +59,7 @@
 
                             </li>
 
-                        }
+                        } *@
                     </ul>
                     @* Search section *@
                     <form class="d-flex" asp-controller="Movies" asp-action="Filter">
