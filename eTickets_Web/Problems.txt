@@ -8,7 +8,11 @@
 -* 04.01.24 - Kullanıcı normal user da olsa "create new" linki gözüküyor(movie sayfasında)
 
 
-- 08.01.24 _ Header kısmında Management bölümünün çıkmaması
++ÇÇ 08.01.24 _ Header kısmında Management bölümünün çıkmaması
+	Management bölümünde sadece Cinemas menü adımı çıkıyor.Diğerleri ekrana gelse bile gözükmüyor. 
+	Ama tarayıcının adres satırında direkt olarak yazıldığında ilgili bölüme ulaşılabiliyor.
+
+
 - 08.01.24 _ Yeni movie,actor,cinema,producer
 
 
