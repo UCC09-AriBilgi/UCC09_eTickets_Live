@@ -9,11 +9,8 @@
     ViewData["Title"] = "List of Actors";
 }
 
-<h1>Index</h1>
+@Html.Partial("_CreateItem", "Actors")
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>

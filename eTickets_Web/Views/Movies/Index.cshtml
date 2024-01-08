@@ -6,9 +6,8 @@
 
 <h1>List of Movies</h1>
 
-<p>
-    <a asp-action="Create">Yeni Kayıt</a>
-</p>
+@Html.Partial("_CreateItem","Movies")
+
 @* Bootstrap Card View *@
 <div class="row">
     @foreach (var item in Model)

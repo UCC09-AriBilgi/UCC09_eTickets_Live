@@ -4,11 +4,9 @@
     ViewData["Title"] = "List of Cinemas";
 }
 
-<h1>Index</h1>
+@Html.Partial("_CreateItem", "Cinemas")
 
-<p>
-    <a asp-action="Create">Yeni Kayıt</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>

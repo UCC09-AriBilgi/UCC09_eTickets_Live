@@ -4,11 +4,9 @@
     ViewData["Title"] = "List of Producers";
 }
 
-<h1>List of Producers</h1>
 
-<p>
-    <a asp-action="Create">Yeni Kayıt</a>
-</p>
+@Html.Partial("_CreateItem", "Producers")
+
 <table class="table">
     <thead>
         <tr class="text-center">
